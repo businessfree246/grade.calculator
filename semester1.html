@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculateur de notes - Semestre</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071129 0%, #0b1930 60%);color:#e6eef8}
+    .wrap{max-width:1100px;margin:32px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{margin:0;font-size:20px;letter-spacing:0.2px}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-top:22px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    form .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    form .row:last-child{border-bottom:0}
+    label{flex:1;min-width:0}
+    .meta{display:flex;gap:8px;align-items:center}
+    input[type=number]{width:100px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .credit{background:var(--glass);padding:6px 8px;border-radius:8px;font-size:13px;color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#4f46e5);color:white}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .results{display:grid;gap:10px}
+    .result-line{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:linear-gradient(90deg, rgba(124,58,237,0.06), rgba(79,70,229,0.04));}
+    .score{font-weight:700}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    .big{font-size:22px;font-weight:800}
+    .download{display:flex;gap:8px;margin-top:12px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr;}.wrap{margin:12px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Calculateur de notes du semestre</h1>
+        <p class="lead">Saisis les notes sur 100 (Partiel 30% + Final 70%). Moyenne pondérée par crédits (total = 30).</p>
+      </div>
+      <div style="text-align:right">
+        <div class="credit">Crédits totaux : <strong>30</strong></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px">Pondération : partiel 30% · final 70%</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <form id="gradesForm">
+          <!-- Each row: label, inputs -->
+
+          <div class="row">
+            <label>I2201 (Web)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2201_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2201_final" placeholder="Final">
+              <div class="credit">4 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>I2202 (OS)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2202_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2202_final" placeholder="Final">
+              <div class="credit">4 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>I2203 (Architecture)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2203_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2203_final" placeholder="Final">
+              <div class="credit">4 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>I2204 (C++ Language)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2204_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2204_final" placeholder="Final">
+              <div class="credit">5 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>I2205 (Graph)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2205_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2205_final" placeholder="Final">
+              <div class="credit">3 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>I2235 (Python)</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="I2235_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="I2235_final" placeholder="Final">
+              <div class="credit">3 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>S2250</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="S2250_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="S2250_final" placeholder="Final">
+              <div class="credit">4 cr</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>M2250</label>
+            <div class="meta">
+              <input type="number" min="0" max="100" step="0.01" name="M2250_partiel" placeholder="Partiel">
+              <input type="number" min="0" max="100" step="0.01" name="M2250_final" placeholder="Final">
+              <div class="credit">3 cr</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:12px;justify-content:flex-start">
+            <button type="button" class="btn primary" id="calcBtn">Calculer</button>
+            <button type="button" class="btn ghost" id="resetBtn">Réinitialiser</button>
+          </div>
+
+          <div class="download">
+            <button type="button" class="btn" id="downloadBtn">Télécharger cette page</button>
+            <button type="button" class="btn" id="shareBtn">Ouvrir dans un nouvel onglet</button>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">Récapitulatif des notes</div>
+            <div class="big" id="overallBig">— /100</div>
+            <div style="color:var(--muted);font-size:13px">Moyenne générale pondérée</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted)">Total crédits : <strong>30</strong></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:8px">Calcul : 30% partiel · 70% final</div>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:12px 0">
+
+        <div class="results" id="resultsArea">
+          <!-- dynamique -->
+        </div>
+
+        <footer>
+          <div id="creditsBreakdown" style="margin-top:10px;color:var(--muted);font-size:13px"></div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const credits = {
+        "I2201":4,"I2202":4,"I2203":4,"I2204":5,"I2205":3,"I2235":3,"S2250":4,"M2250":3
+      };
+
+      const subjects = [
+        {id:'I2201', name:'I2201 (Web)'},
+        {id:'I2202', name:'I2202 (OS)'},
+        {id:'I2203', name:'I2203 (Architecture)'},
+        {id:'I2204', name:'I2204 (C++ Language)'},
+        {id:'I2205', name:'I2205 (Graph)'},
+        {id:'I2235', name:'I2235 (Python)'},
+        {id:'S2250', name:'S2250'},
+        {id:'M2250', name:'M2250'}
+      ];
+
+      const resultsArea = document.getElementById('resultsArea');
+      const overallBig = document.getElementById('overallBig');
+      const creditsBreakdown = document.getElementById('creditsBreakdown');
+
+      function format(n){return (Math.round(n*100)/100).toFixed(2)}
+
+      document.getElementById('calcBtn').addEventListener('click', ()=>{
+        const form = document.getElementById('gradesForm');
+        let totalWeighted = 0;
+        let totalCredits = 0;
+        resultsArea.innerHTML = '';
+        let missing = false;
+
+        subjects.forEach(s=>{
+          const p = form[`${s.id}_partiel`].value;
+          const f = form[`${s.id}_final`].value;
+          if(p === '' || f === ''){ missing = true; }
+          const partiel = parseFloat(p) || 0;
+          const finals = parseFloat(f) || 0;
+          // Clamp 0..100
+          const pp = Math.max(0, Math.min(100, partiel));
+          const ff = Math.max(0, Math.min(100, finals));
+          const note = 0.3*pp + 0.7*ff;
+          const cr = credits[s.id] || 0;
+          totalWeighted += note*cr;
+          totalCredits += cr;
+
+          const line = document.createElement('div');
+          line.className = 'result-line';
+          line.innerHTML = `<div>${s.name} <div style="font-size:12px;color:var(--muted)">Crédits: ${cr}</div></div><div class="score">${format(note)}/100</div>`;
+          resultsArea.appendChild(line);
+        });
+
+        const overall = totalWeighted / (totalCredits || 1);
+        overallBig.textContent = `${format(overall)} /100`;
+
+        creditsBreakdown.textContent = `Somme pondérée: ${format(totalWeighted)} · Somme crédits: ${totalCredits}`;
+
+        if(missing){
+          // show small warning
+          const warn = document.createElement('div');
+          warn.style.color = '#ffd166';
+          warn.style.marginTop = '8px';
+          warn.textContent = 'Remarque : certaines notes étaient vides et ont été traitées comme 0. Remplis toutes les notes si tu veux une moyenne exacte.';
+          resultsArea.appendChild(warn);
+        }
+      });
+
+      document.getElementById('resetBtn').addEventListener('click', ()=>{
+        document.getElementById('gradesForm').reset();
+        resultsArea.innerHTML = '';
+        overallBig.textContent = '— /100';
+        creditsBreakdown.textContent = '';
+      });
+
+      // Download current page as HTML file
+      function getFullHtml(){
+        // We reconstruct a minimal HTML page containing the current document's outerHTML and inline styles
+        return '<!doctype html>\n' + document.documentElement.outerHTML;
+      }
+
+      document.getElementById('downloadBtn').addEventListener('click', ()=>{
+        const blob = new Blob([getFullHtml()], {type: 'text/html;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'calculateur_notes_semestre.html';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(()=>URL.revokeObjectURL(url), 5000);
+      });
+
+      // Open same page in new tab (data URL)
+      document.getElementById('shareBtn').addEventListener('click', ()=>{
+        const html = getFullHtml();
+        const w = window.open();
+        if(!w){ alert('Impossible d'ouvrir un nouvel onglet : le bloqueur de fenêtres peut en être la cause.'); return; }
+        w.document.open();
+        w.document.write(html);
+        w.document.close();
+      });
+
+      // small accessibility: allow Enter on inputs to calculate
+      document.getElementById('gradesForm').addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter'){
+          e.preventDefault();
+          document.getElementById('calcBtn').click();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
